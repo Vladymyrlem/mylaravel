@@ -12,7 +12,7 @@ class ReadXlsxController extends Controller
     function index()
     {
         $data = DB::table('csvdata')->orderBy('id', 'DESC')->get();
-        return view('import-xls');
+        return view('import-xls',  ['data' => $data]);
     }
 
     function import(Request $request)
