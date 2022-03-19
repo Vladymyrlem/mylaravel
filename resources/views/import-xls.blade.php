@@ -66,17 +66,60 @@
                         <th>Date</th>
                         <th>Address</th>
                         <th>Contacts</th>
+                        <th>Emails</th>
+                        <th>Social Links</th>
                         <th>About company</th>
+                        <th>Additional information</th>
+                        <th>Services list</th>
+                        <th>Links</th>
+                        <th>Boss initials</th>
+                        <th>Boss position</th>
+                        <th>Loyalty programs</th>
+                        <th>Payments</th>
+                        <th>Categories</th>
+                        <th>Tags</th>
+                        <th>Images</th>
                     </tr>
                     @foreach($data as $row)
                         <tr>
-                            <td>{{ $row->Title }}</td>
-                            <td>{{ $row->Content }}</td>
-                            <td>{{ $row->Excerpt }}</td>
-                            <td>{{ $row->Date }}</td>
+                            <td>{{ $row->title }}</td>
+                            <td>{!! $row->content!!}</td>
+                            <td>{{ $row->excerpt }}</td>
+                            <td>{{ $row->date }}</td>
                             <td>{{ $row->address }}</td>
-                            <td>{{ $row->Contacts }}</td>
-                            <td>{{ $row->AboutCompany }}</td>
+                            <td>{{ $row->contacts }}</td>
+                            <td>{{ $row->emails }}</td>
+                            <td><a href="{{ $row->social_links }}"></a></td>
+                            <td>{!!$row->about_company !!}</td>
+                            <td>{{ $row->additional_information }}</td>
+                            <td>{{ $row->services_list }}</td>
+                            <td>{{ $row->links }}</td>
+                            <td>{{ $row->boss_initials }}</td>
+                            <td>{{ $row->boss_position }}</td>
+                            <td>{{ $row->loyalty_programs }}</td>
+                            <td>
+                                @if(!empty($row->payments))
+                                <ul>
+                            @foreach(explode(',', $row->payments) as $fields)
+                                <li>{{$fields}}</li>
+                            @endforeach
+                                </ul>
+                                    @else
+
+                                @endif
+                            </td>
+                            <td>
+                                @if(!empty($row->categories))
+                                    <ul>
+                                        @foreach(explode('>', $row->categories) as $cats)
+                                            <li>{{$cats}}</li>
+                                        @endforeach
+                                    </ul>
+                                @else
+                                @endif
+                            </td>
+                            <td>{{ $row->tags }}</td>
+                            <td><img width="150" height="150" src="{{ $row->image }}" alt=""></td>
                         </tr>
                     @endforeach
                 </table>

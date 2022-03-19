@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Imports\UsersImport;
-use App\Models\PostXls;
 use App\Models\Csvdata;
 use Illuminate\Http\Request;
 use DB;
@@ -13,7 +12,7 @@ class ReadXlsxController extends Controller
 
     function index()
     {
-        $data = DB::table('csvdata')->orderBy('id', 'DESC')->get();
+        $data = DB::table('csvdatas')->orderBy('id', 'DESC')->get();
         return view('import-xls',  ['data' => $data]);
     }
 
@@ -38,15 +37,27 @@ class ReadXlsxController extends Controller
                         'Excerpt'   => $row['excerpt'],
                         'Date'    => $row['date'],
                         'address'  => $row['address'],
+                        'Address link'  => $row['address_link'],
                         'Contacts'   => $row['contacts'],
-                        'AboutCompany'   => $row['about_company']
+                        'Emails'   => $row['emails'],
+                        'AboutCompany'   => $row['about_company'],
+                        'AdditionalInformation'   => $row['additional_information'],
+                        'ServicesList'   => $row['services_list'],
+                        'Links'   => $row['links'],
+                        'BossInitials'   => $row['boss_initials'],
+                        'BossPosition'   => $row['boss_position'],
+                        'LoyaltyPrograms'   => $row['loyalty_programs'],
+                        'Payments'   => $row['payments'],
+                        'Categories'   => $row['categories'],
+                        'Tags'   => $row['tags'],
+                        'Image'   => $row['image']
                     );
                 }
             }
 
             if(!empty($insert_data))
             {
-                DB::table('csvdata')->insert($insert_data);
+                DB::table('csvdatas')->insert($insert_data);
             }
         }
         return back()->with('success', 'Excel Data Imported successfully.');

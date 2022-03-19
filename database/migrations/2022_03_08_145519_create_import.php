@@ -12,15 +12,28 @@ class CreateImport extends Migration
      * @return void
      */
     public function up() {
-        Schema::create ( 'csvData', function ($table) {
+        Schema::create ( 'csvDatas', function ($table) {
             $table->id( 'id' );
             $table->string ( 'title' );
-            $table->longText ( 'content');
-            $table->string ( 'excerpt' );
-            $table->date( 'date' );
-            $table->string ( 'address' );
-            $table->string ( 'contacts' );
-            $table->string ( 'about_company' );
+            $table->longText ( 'content')->nullable();
+            $table->text ( 'excerpt' )->nullable();
+            $table->datetime( 'date' );
+            $table->text ( 'address' )->nullable();
+            $table->text ( 'address_link' )->nullable();
+            $table->text ( 'contacts' )->nullable();
+            $table->text ( 'emails' )->nullable();
+            $table->text ( 'social_links' )->nullable();
+            $table->text ( 'about_company' )->nullable();
+            $table->text ( 'additional_information' )->nullable();
+            $table->text ( 'services_list' )->nullable();
+            $table->text ( 'links' )->nullable();
+            $table->text ( 'boss_initials' )->nullable();
+            $table->text ( 'boss_position' )->nullable();
+            $table->text ( 'loyalty_programs' )->nullable();
+            $table->text ( 'payments' )->nullable();
+            $table->text ( 'categories' )->nullable();
+            $table->text ( 'tags' )->nullable();
+            $table->text ( 'image' )->nullable();
         } );
     }
 

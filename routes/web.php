@@ -17,6 +17,8 @@ use App\Csvdata;
 Route::get('/', 'HomeController@index');
 Route::get('/test', 'HomeController@test');
 Route::get('/test2', 'Test\TestController@index');
+Route::get('/companies', 'CompaniesController@index');
+Route::get('/companies/{slug}', 'CompaniesController@show');
 Route::get('/page/{slug}', 'PageController@show');
 Route::match(["get", "post"], "read-xml", [ReadXmlController::class, "index"])->name('xml-upload');
 Route::get('/spa', 'SpaController@index')->where('any', '.*');
