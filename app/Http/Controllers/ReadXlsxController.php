@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\UsersImport;
+use App\Models\PostXls;
+use App\Models\Csvdata;
 use Illuminate\Http\Request;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
-$data = DB::table('csvdata')->orderBy('id', 'DESC')->get();
 class ReadXlsxController extends Controller
 {
 
     function index()
     {
         $data = DB::table('csvdata')->orderBy('id', 'DESC')->get();
-        return view('import-xls');
+        return view('import-xls',  ['data' => $data]);
     }
 
     function import(Request $request)
@@ -23,8 +25,7 @@ class ReadXlsxController extends Controller
 
         $path = $request->file('select_file')->getRealPath();
 
-        $data = Excel::load($path)->get();
-
+        $data = Excel::import(new UsersImport(),$path);
         if($data->count() > 0)
         {
             foreach($data->toArray() as $key => $value)
