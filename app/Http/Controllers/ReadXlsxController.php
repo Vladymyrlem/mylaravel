@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Maatwebsite\Excel\Facades\Excel;
-$data = DB::table('csvdata')->orderBy('id', 'DESC')->get();
+//$data = DB::table('csvdata')->orderBy('id', 'DESC')->get();
 class ReadXlsxController extends Controller
 {
 
