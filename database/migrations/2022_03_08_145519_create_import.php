@@ -12,7 +12,7 @@ class CreateImport extends Migration
      * @return void
      */
     public function up() {
-        Schema::create ( 'csvDatas', function ($table) {
+        Schema::create ( 'companies', function ($table) {
             $table->id( 'id' );
             $table->string ( 'title' );
             $table->longText ( 'content')->nullable();

@@ -17,9 +17,13 @@ use App\Csvdata;
 Route::get('/', 'HomeController@index');
 Route::get('/test', 'HomeController@test');
 Route::get('/test2', 'Test\TestController@index');
-Route::get('/companies', 'CompaniesController@index');
-Route::get('/companies/{slug}', 'CompaniesController@show');
-Route::get('/page/{slug}', 'PageController@show');
+//Route::get('/company', 'CompanyController@index');
+Route::get('/company/{slug}', 'CompanyController@show');
+Route::group([ 'prefix' => ''], function () {
+    Route::get('/page/company', 'PageController@company');
+    Route::get('/page/ads', 'PageController@ads');
+});
+Route::get('/companies', 'PageController@company');
 Route::match(["get", "post"], "read-xml", [ReadXmlController::class, "index"])->name('xml-upload');
 Route::get('/spa', 'SpaController@index')->where('any', '.*');
 Route::get('/import', function () {
@@ -47,6 +51,8 @@ Route::resource('/admin/posts', 'PostController', ['parameters' => [
 ]]);
 Route::get('/import_excel', 'ReadXlsxController@index');
 Route::post('/import_excel/import', 'ReadXlsxController@import');
+Route::get('/import_category', 'ReadCompanyController@index');
+Route::post('/import_category/import', 'ReadCompanyController@import');
 Route::fallback(function () {
 //    return redirect()->route('home');
     abort(404, 'Oops! Page not found...');
